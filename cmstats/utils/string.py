@@ -7,12 +7,12 @@ def parse_modversion(modversion):
         return None
 
     # Determine RC Version
-    match_rc = re.match(r"^CyanogenMod-(\d\.\d\.\d\.?\d?)-RC(\d+)-.*$", modversion)
-    match_stable = re.match(r"^CyanogenMod-(\d\.\d\.\d\.?\d?)-.*$", modversion)
-    match_nightly = re.match(r"^CyanogenMod-(\d)-\d{8}-NIGHTLY-.*$", modversion)
+    match_rc = re.match(r"^(CyanogenMod-)*(\d\.\d\.\d\.?\d?)-RC(\d+)-.+$", modversion)
+    match_stable = re.match(r"^(CyanogenMod-)*(\d\.\d\.\d\.?\d?)-.+$", modversion)
+    match_nightly = re.match(r"^(CyanogenMod-)*(\d)-\d{8}-NIGHTLY-.+$", modversion)
 
     if match_rc:
-        return "%s-RC%s" % (match_rc.group(1), match_rc.group(2))
+        return "%s-RC%s" % (match_rc.group(2), match_rc.group(3))
 
     elif match_nightly:
         return "Nightly"
